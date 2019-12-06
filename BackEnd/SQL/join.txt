@@ -1,0 +1,99 @@
+SQL> select e.ename,e.job,e.sal*12 annualsal,e.deptno,d.dname from emp e,dept d where e.sal*12=3000
+  2  and e.job not like 'CLERK';
+
+no rows selected
+
+SQL> select e.ename empname,e.empno empnum,m.ename mgrname,m.empno mgrnum from emp e,emp m where e.mgr=m.empno;
+
+EMPNAME        EMPNUM MGRNAME        MGRNUM                                     
+---------- ---------- ---------- ----------                                     
+FORD             7902 JONES            7566                                     
+SCOTT            7788 JONES            7566                                     
+TURNER           7844 BLAKE            7698                                     
+ALLEN            7499 BLAKE            7698                                     
+WARD             7521 BLAKE            7698                                     
+JAMES            7900 BLAKE            7698                                     
+MARTIN           7654 BLAKE            7698                                     
+MILLER           7934 CLARK            7782                                     
+ADAMS            7876 SCOTT            7788                                     
+BLAKE            7698 KING             7839                                     
+JONES            7566 KING             7839                                     
+
+EMPNAME        EMPNUM MGRNAME        MGRNUM                                     
+---------- ---------- ---------- ----------                                     
+CLARK            7782 KING             7839                                     
+SMITH            7369 FORD             7902                                     
+
+13 rows selected.
+
+SQL> set pages 123 lines 234;
+SQL> select e.ename,d.dname from emp e,dept d where e.deptno(+)=d.deptno;
+
+ENAME      DNAME                                                                                                                                                                                                                          
+---------- --------------                                                                                                                                                                                                                 
+CLARK      ACCOUNTING                                                                                                                                                                                                                     
+KING       ACCOUNTING                                                                                                                                                                                                                     
+MILLER     ACCOUNTING                                                                                                                                                                                                                     
+JONES      RESEARCH                                                                                                                                                                                                                       
+FORD       RESEARCH                                                                                                                                                                                                                       
+ADAMS      RESEARCH                                                                                                                                                                                                                       
+SMITH      RESEARCH                                                                                                                                                                                                                       
+SCOTT      RESEARCH                                                                                                                                                                                                                       
+WARD       SALES                                                                                                                                                                                                                          
+TURNER     SALES                                                                                                                                                                                                                          
+ALLEN      SALES                                                                                                                                                                                                                          
+JAMES      SALES                                                                                                                                                                                                                          
+BLAKE      SALES                                                                                                                                                                                                                          
+MARTIN     SALES                                                                                                                                                                                                                          
+           OPERATIONS                                                                                                                                                                                                                     
+
+15 rows selected.
+
+SQL> select e.ename,d.dname from emp e,dept d where e.deptno=d.deptno;
+
+ENAME      DNAME                                                                                                                                                                                                                          
+---------- --------------                                                                                                                                                                                                                 
+CLARK      ACCOUNTING                                                                                                                                                                                                                     
+KING       ACCOUNTING                                                                                                                                                                                                                     
+MILLER     ACCOUNTING                                                                                                                                                                                                                     
+JONES      RESEARCH                                                                                                                                                                                                                       
+FORD       RESEARCH                                                                                                                                                                                                                       
+ADAMS      RESEARCH                                                                                                                                                                                                                       
+SMITH      RESEARCH                                                                                                                                                                                                                       
+SCOTT      RESEARCH                                                                                                                                                                                                                       
+WARD       SALES                                                                                                                                                                                                                          
+TURNER     SALES                                                                                                                                                                                                                          
+ALLEN      SALES                                                                                                                                                                                                                          
+JAMES      SALES                                                                                                                                                                                                                          
+BLAKE      SALES                                                                                                                                                                                                                          
+MARTIN     SALES                                                                                                                                                                                                                          
+
+14 rows selected.
+
+SQL> select d.loc,e.comm from emp e,dept d where e.deptno=d.deptno and e.comm is not null;
+
+LOC                 COMM                                                                                                                                                                                                                  
+------------- ----------                                                                                                                                                                                                                  
+CHICAGO              300                                                                                                                                                                                                                  
+CHICAGO                0                                                                                                                                                                                                                  
+CHICAGO             1400                                                                                                                                                                                                                  
+CHICAGO              500                                                                                                                                                                                                                  
+
+SQL> select d.dname.min(e.sal) from emp e,dept d where e.deptno=d.deptno and e.mgr is null group by d.dname;
+select d.dname.min(e.sal) from emp e,dept d where e.deptno=d.deptno and e.mgr is null group by d.dname
+       *
+ERROR at line 1:
+ORA-00904: "D"."DNAME"."MIN": invalid identifier 
+
+
+SQL> select d.dname,min(e.sal) from emp e,dept d where e.deptno=d.deptno and e.mgr is null group by  d.dname;
+
+DNAME          MIN(E.SAL)                                                                                                                                                                                                                 
+-------------- ----------                                                                                                                                                                                                                 
+ACCOUNTING           5000                                                                                                                                                                                                                 
+
+SQL> select d.dname,d.loc from emp e,emp m,dept d where e.deptno=d.deptno and e.mgr=m.empno and m.ename='SMITH';
+
+no rows selected
+
+SQL> spool off;

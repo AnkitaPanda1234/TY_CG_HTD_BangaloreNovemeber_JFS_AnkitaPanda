@@ -1,0 +1,24 @@
+SQL> select deptno,max(sal),avg(sal) from emp group by deptno having max(sal)>avg(sal);
+
+    DEPTNO   MAX(SAL)   AVG(SAL)                                                                                                                                                                                                          
+---------- ---------- ----------                                                                                                                                                                                                          
+        30       2850 1566.66667                                                                                                                                                                                                          
+        20       3000       2175                                                                                                                                                                                                          
+        10       5000 2916.66667                                                                                                                                                                                                          
+
+SQL> select deptno,max(sal),avg(sal) from emp group by deptno having count(*)>2;
+
+    DEPTNO   MAX(SAL)   AVG(SAL)                                                                                                                                                                                                          
+---------- ---------- ----------                                                                                                                                                                                                          
+        30       2850 1566.66667                                                                                                                                                                                                          
+        20       3000       2175                                                                                                                                                                                                          
+        10       5000 2916.66667                                                                                                                                                                                                          
+
+SQL> select deptno from emp group by deptno having count(*)>3;
+
+    DEPTNO                                                                                                                                                                                                                                
+----------                                                                                                                                                                                                                                
+        30                                                                                                                                                                                                                                
+        20                                                                                                                                                                                                                                
+
+SQL> spool off;

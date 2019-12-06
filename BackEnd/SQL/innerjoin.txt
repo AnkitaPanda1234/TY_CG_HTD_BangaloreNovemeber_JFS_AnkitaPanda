@@ -1,0 +1,169 @@
+SQL> select e.ename,d.loc from emp e,dept d where e.deptno=d.deptno;
+
+ENAME      LOC                                                                  
+---------- -------------                                                        
+CLARK      NEW YORK                                                             
+KING       NEW YORK                                                             
+MILLER     NEW YORK                                                             
+JONES      DALLAS                                                               
+FORD       DALLAS                                                               
+ADAMS      DALLAS                                                               
+SMITH      DALLAS                                                               
+SCOTT      DALLAS                                                               
+WARD       CHICAGO                                                              
+TURNER     CHICAGO                                                              
+ALLEN      CHICAGO                                                              
+
+ENAME      LOC                                                                  
+---------- -------------                                                        
+JAMES      CHICAGO                                                              
+BLAKE      CHICAGO                                                              
+MARTIN     CHICAGO                                                              
+
+14 rows selected.
+
+SQL> set pages 123 lines 123;
+SQL> select e.ename,d.loc from emp e,dept d where e.deptno=d.deptno;
+
+ENAME      LOC                                                                                                             
+---------- -------------                                                                                                   
+CLARK      NEW YORK                                                                                                        
+KING       NEW YORK                                                                                                        
+MILLER     NEW YORK                                                                                                        
+JONES      DALLAS                                                                                                          
+FORD       DALLAS                                                                                                          
+ADAMS      DALLAS                                                                                                          
+SMITH      DALLAS                                                                                                          
+SCOTT      DALLAS                                                                                                          
+WARD       CHICAGO                                                                                                         
+TURNER     CHICAGO                                                                                                         
+ALLEN      CHICAGO                                                                                                         
+JAMES      CHICAGO                                                                                                         
+BLAKE      CHICAGO                                                                                                         
+MARTIN     CHICAGO                                                                                                         
+
+14 rows selected.
+
+SQL> select e.ename,d.dname ,e.sal from emp e,dept d where e.deptno=d.deptno and d.dname='ACCOUNTING';
+
+ENAME      DNAME                 SAL                                                                                       
+---------- -------------- ----------                                                                                       
+CLARK      ACCOUNTING           2450                                                                                       
+KING       ACCOUNTING           5000                                                                                       
+MILLER     ACCOUNTING           1300                                                                                       
+
+SQL> select d.dname,e.sal,e.sal*12 annualsal from emp e,dept d where e.deptno=d.deptno and e.sal>2340;
+
+DNAME                 SAL  ANNUALSAL                                                                                       
+-------------- ---------- ----------                                                                                       
+ACCOUNTING           2450      29400                                                                                       
+ACCOUNTING           5000      60000                                                                                       
+RESEARCH             3000      36000                                                                                       
+RESEARCH             3000      36000                                                                                       
+RESEARCH             2975      35700                                                                                       
+SALES                2850      34200                                                                                       
+
+6 rows selected.
+
+SQL> select e.ename,d.dname from emp e,dept d where e.deptno=d.deptno and e.ename like '%A%';
+
+ENAME      DNAME                                                                                                           
+---------- --------------                                                                                                  
+ALLEN      SALES                                                                                                           
+WARD       SALES                                                                                                           
+MARTIN     SALES                                                                                                           
+BLAKE      SALES                                                                                                           
+CLARK      ACCOUNTING                                                                                                      
+ADAMS      RESEARCH                                                                                                        
+JAMES      SALES                                                                                                           
+
+7 rows selected.
+
+SQL> select e.ename,d.dname,e.job from emp e,dept d where e.deptno=d.deptno and e.job='SALESMAN';
+
+ENAME      DNAME          JOB                                                                                              
+---------- -------------- ---------                                                                                        
+ALLEN      SALES          SALESMAN                                                                                         
+TURNER     SALES          SALESMAN                                                                                         
+MARTIN     SALES          SALESMAN                                                                                         
+WARD       SALES          SALESMAN                                                                                         
+
+SQL> select d.dname,e.ename,e.job from emp e,dept d where e.deptno=d.deptno and d.dname like 'S%'
+  2  and e.job like 'S%';
+
+DNAME          ENAME      JOB                                                                                              
+-------------- ---------- ---------                                                                                        
+SALES          ALLEN      SALESMAN                                                                                         
+SALES          TURNER     SALESMAN                                                                                         
+SALES          MARTIN     SALESMAN                                                                                         
+SALES          WARD       SALESMAN                                                                                         
+
+SQL> select e.ename,d.dname,e.mgr from emp e,dept d where e.deptno=d.deptno and e.mgr=7839;
+
+ENAME      DNAME                 MGR                                                                                       
+---------- -------------- ----------                                                                                       
+JONES      RESEARCH             7839                                                                                       
+BLAKE      SALES                7839                                                                                       
+CLARK      ACCOUNTING           7839                                                                                       
+
+SQL> select e.ename,d.dname,e.hiredate from emp e,dept d where e.deptno=d.deptno and
+  2  e.hiredate>'31-DEC-83' and d.dname in('ACCOUNTING','RESEARCH');
+
+ENAME      DNAME          HIREDATE                                                                                         
+---------- -------------- ---------                                                                                        
+ADAMS      RESEARCH       23-MAY-87                                                                                        
+SCOTT      RESEARCH       19-APR-87                                                                                        
+
+SQL> SELECT E.ENAME,D.DNAME,E.COMM FROM EMP E,DEPT D WHERE E.DEPTNO=D.DEPTNO AND E.COMM IS NOT NULL AND E.DEPTNO IN (10,30);
+
+ENAME      DNAME                COMM                                                                                       
+---------- -------------- ----------                                                                                       
+ALLEN      SALES                 300                                                                                       
+WARD       SALES                 500                                                                                       
+MARTIN     SALES                1400                                                                                       
+TURNER     SALES                   0                                                                                       
+
+SQL> select d.dname,d.loc,e.empno from emp e,dept d where e.deptno=d.deptno and
+  2  e.empno in(7839,7902) and d.loc ='NEW YORK';
+
+DNAME          LOC                EMPNO                                                                                    
+-------------- ------------- ----------                                                                                    
+ACCOUNTING     NEW YORK            7839                                                                                    
+
+SQL> select d.loc,avg(e.sal) from emp e,dept d where e.deptno=d.deptno and e.ename not
+  2  like '_A%' group by d.loc;
+
+LOC           AVG(E.SAL)                                                                                                   
+------------- ----------                                                                                                   
+NEW YORK      2916.66667                                                                                                   
+CHICAGO       1983.33333                                                                                                   
+DALLAS              2175                                                                                                   
+
+SQL> select e.ename,d.loc from emp e,emp m,dept d where e.deptno=d.deptno and e.mgr=m.empno
+  2  and e.job='MANAGER' and e.mgr=7839;
+
+ENAME      LOC                                                                                                             
+---------- -------------                                                                                                   
+JONES      DALLAS                                                                                                          
+BLAKE      CHICAGO                                                                                                         
+CLARK      NEW YORK                                                                                                        
+
+SQL> select d.dname,e.empno from emp e,dept d where e.deptno=d.deptno
+  2  and e.job='CLERK' and e.mgr is not null;
+
+DNAME               EMPNO                                                                                                  
+-------------- ----------                                                                                                  
+ACCOUNTING           7934                                                                                                  
+RESEARCH             7369                                                                                                  
+RESEARCH             7876                                                                                                  
+SALES                7900                                                                                                  
+
+SQL> select d.dname,count(e.empno) from emp e,dept d where e.deptno=d.deptno and e.job in('MANAGER','CLERK') group by d.dname;
+
+DNAME          COUNT(E.EMPNO)                                                                                              
+-------------- --------------                                                                                              
+ACCOUNTING                  2                                                                                              
+RESEARCH                    3                                                                                              
+SALES                       2                                                                                              
+
+SQL> spool off;
