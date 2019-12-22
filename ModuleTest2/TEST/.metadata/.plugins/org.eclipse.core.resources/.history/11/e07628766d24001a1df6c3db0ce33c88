@@ -1,0 +1,15 @@
+package com.cap.moduletest1.controller;
+
+import java.util.Scanner;
+
+import com.cap.moduletest1.dao.ProductDao;
+import com.cap.moduletest1.factory.ProductFactory;
+
+public class ProductMain {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		ProductDao dao=ProductFactory.instanceOfProductDapImpl();
+		
+	}
+
+}

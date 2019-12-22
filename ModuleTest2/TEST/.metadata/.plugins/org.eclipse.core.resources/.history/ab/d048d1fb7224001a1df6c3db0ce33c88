@@ -1,0 +1,138 @@
+package com.cap.moduletest1.dao;
+
+import java.io.FileReader;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.cap.moduletest1.baen.ProductBean;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
+public class ProductDaoImpl implements ProductDao {
+	Properties prop;
+	FileReader reader;
+	ProductBean bean;
+	public ProductDaoImpl()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			 reader = new FileReader("product.properties");
+			 prop = new Properties();
+			prop.load(reader);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+
+	}
+
+	@Override
+	public List<ProductBean> showAllItems() {
+		
+		List<ProductBean> l1=new ArrayList<ProductBean>();
+		try(Connection conn= (Connection) DriverManager.getConnection(prop.getProperty("dbUrl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbPassword"));
+				Statement stmt= (Statement) conn.createStatement();
+				ResultSet rs=stmt.executeQuery(prop.getProperty("selectQuery")))
+		{
+			while(rs.next())
+			{
+				ProductBean bean=new ProductBean();
+				bean.setProduct_id(rs.getInt(1));
+				bean.setPdoductname(rs.getString(2));
+				bean.setProductcost(rs.getDouble(3));
+				bean.setProductcolor(rs.getString(4));
+				bean.setDescription(rs.getString(5));
+				bean.setNumofproduct(rs.getInt(6));
+			}
+			return l1;
+		   }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
+		
+	
+	
+
+	@Override
+	public ProductBean searchItems(String productname) {
+		try(Connection conn=(Connection) DriverManager.getConnection(prop.getProperty("dbUrl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbPassword"));
+				PreparedStatement pstmt=(PreparedStatement) 
+						conn.prepareStatement(prop.getProperty("Query")))
+				
+		{
+			pstmt.setString(1, productname);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+			ProductBean bean=new ProductBean();
+			bean.setProduct_id(rs.getInt("product_id"));
+			bean.setProductcost(rs.getDouble("productcost"));
+			bean.setProductcolor(rs.getString("productcolor"));
+			bean.setDescription(rs.getString("description"));	
+			bean.setNumofproduct(rs.getInt("numofproduct"));
+			
+			return bean;
+			}
+			else
+			{
+				
+				return null;
+			}
+			
+			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public boolean buyProduct(ProductBean bean) {
+		
+		try(Connection conn=(Connection) DriverManager.getConnection(prop.getProperty("dbUrl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbPassword"));
+				PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(prop.getProperty("query2")))
+				
+		{
+		
+			pstmt.setInt(1,bean.getProduct_id());
+			pstmt.setString(2, bean.getProductname());
+			pstmt.setDouble(3, bean.getProductcost());
+			pstmt.setString(4, bean.getProductcolor());
+			pstmt.setString(5, bean.getDescription());
+			pstmt.setInt(6, bean.getNumofproduct());	
+			int r=pstmt.executeUpdate();
+			if(r>0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+
+}

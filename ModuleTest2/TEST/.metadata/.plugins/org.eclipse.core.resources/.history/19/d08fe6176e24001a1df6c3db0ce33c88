@@ -1,0 +1,20 @@
+package com.cap.moduletest1.controller;
+
+import java.util.Scanner;
+
+import com.cap.moduletest1.dao.ProductDao;
+import com.cap.moduletest1.factory.ProductFactory;
+
+public class ProductMain {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		ProductDao dao=ProductFactory.instanceOfProductDapImpl();
+		while(true) {
+			System.out.println("Enter the choice to move forward");
+			System.out.println("press 1 for search All Product");
+			System.out.println("Press 2 for search product");
+		}
+		
+	}
+
+}

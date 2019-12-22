@@ -1,0 +1,9 @@
+package com.cap.moduletest1.controller;
+
+public class ProductMain {
+	public static void main(String[] args) {
+		
+		
+	}
+
+}

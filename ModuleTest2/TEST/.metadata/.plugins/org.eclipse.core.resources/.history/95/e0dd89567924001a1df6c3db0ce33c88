@@ -1,0 +1,7 @@
+driverclass=com.mysql.jdbc.Driver
+dbUrl=jdbc:mysql://localhost:3306/Flipkart
+dbUser=root
+dbPassword=root
+selectQuery=select * from product_info
+Query=select * from product_info where pdoductname=?
+query2=insert into product_info where values(?,?,?,?,?,?)

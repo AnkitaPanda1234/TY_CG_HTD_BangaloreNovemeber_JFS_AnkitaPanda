@@ -1,0 +1,49 @@
+package com.cap.moduletest1.dao;
+
+import java.io.FileReader;
+import java.util.List;
+import java.util.Properties;
+
+import com.cap.moduletest1.baen.ProductBean;
+
+public class ProductDaoImpl implements Productdao {
+	Properties prop;
+	FileReader reader;
+	ProductBean bean;
+	public ProductDaoImpl()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			 reader = new FileReader("contact.properties");
+			 prop = new Properties();
+			prop.load(reader);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+
+	}
+
+	@Override
+	public List<ProductBean> showAllItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean searchItems(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean buyProduct(ProductBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+
+}
