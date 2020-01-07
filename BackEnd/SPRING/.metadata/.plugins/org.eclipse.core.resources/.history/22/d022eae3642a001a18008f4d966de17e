@@ -1,0 +1,86 @@
+package com.capgemini.productspringboot.controller;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.capgemini.productspringboot.dto.ProductBean;
+import com.capgemini.productspringboot.dto.ProductResponse;
+import com.capgemini.productspringboot.service.ProductService;
+
+public class ProductController {
+	@Autowired
+	private ProductService service;
+	@PostMapping(path="/register",
+			produces=
+			MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse addProduct(@RequestBody ProductBean bean)
+	{
+		ProductResponse response=new ProductResponse();
+		if(service.addProduct(bean))
+		{
+			response.setStatusCode(201);
+			response.setMessage("Sucess");
+			response.setDescription("Product Registered");
+			
+		}
+		else
+		{
+			response.setStatusCode(401);
+			response.setMessage("Failure");
+			response.setDescription(" Product Already Exits");
+		}
+		return response;
+	}
+	
+	public ProductResponse getProduct(@RequestParam("id")int id)
+	{
+		ProductResponse response=new ProductResponse();
+		ProductBean bean=service.getProduct(id);
+		if(bean==null)
+		{
+			response.setStatusCode(401);
+			response.setMessage("failuer");
+			response.setDescription("Record with perticuler id does'nt exit");
+			
+		}
+		else
+		{
+			response.setStatusCode(201);
+			response.setMessage("success");
+			response.setDescription(" Product found");
+			
+		}
+		return response;
+	}
+	@GetMapping(path="/getAll",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse getAllProduct()
+	{
+		ProductResponse response=new ProductResponse();
+		List<ProductBean> bean=service.getAllProduct();
+		if(bean==null)
+		{
+			
+				response.setStatusCode(401);
+				response.setMessage("failuer");
+				response.setDescription("Record  does'nt exit");
+				
+			}
+			else
+			{
+				response.setStatusCode(201);
+				response.setMessage("success");
+				response.setDescription(" All Product found");
+				
+			}
+			return response;
+		
+	}
+
+}

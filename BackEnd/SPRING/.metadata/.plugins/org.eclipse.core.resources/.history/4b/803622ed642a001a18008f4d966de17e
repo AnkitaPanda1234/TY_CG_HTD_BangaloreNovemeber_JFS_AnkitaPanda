@@ -1,0 +1,127 @@
+package com.capgemini.productspringboot.controller;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.capgemini.productspringboot.dto.ProductBean;
+import com.capgemini.productspringboot.dto.ProductResponse;
+import com.capgemini.productspringboot.service.ProductService;
+import com.capgemini.springboot.dto.EmployeeBean;
+import com.capgemini.springboot.dto.EmployeeResponse;
+
+public class ProductController {
+	@Autowired
+	private ProductService service;
+	@PostMapping(path="/register",
+			produces=
+			MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse addProduct(@RequestBody ProductBean bean)
+	{
+		ProductResponse response=new ProductResponse();
+		if(service.addProduct(bean))
+		{
+			response.setStatusCode(201);
+			response.setMessage("Sucess");
+			response.setDescription("Product Registered");
+			
+		}
+		else
+		{
+			response.setStatusCode(401);
+			response.setMessage("Failure");
+			response.setDescription(" Product Already Exits");
+		}
+		return response;
+	}
+	
+	public ProductResponse getProduct(@RequestParam("id")int id)
+	{
+		ProductResponse response=new ProductResponse();
+		ProductBean bean=service.getProduct(id);
+		if(bean==null)
+		{
+			response.setStatusCode(401);
+			response.setMessage("failuer");
+			response.setDescription("Record with perticuler id does'nt exit");
+			
+		}
+		else
+		{
+			response.setStatusCode(201);
+			response.setMessage("success");
+			response.setDescription(" Product found");
+			
+		}
+		return response;
+	}
+	@GetMapping(path="/getAll",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse getAllProduct()
+	{
+		ProductResponse response=new ProductResponse();
+		List<ProductBean> bean=service.getAllProduct();
+		if(bean==null)
+		{
+			
+				response.setStatusCode(401);
+				response.setMessage("failuer");
+				response.setDescription("Record  does'nt exit");
+				
+			}
+			else
+			{
+				response.setStatusCode(201);
+				response.setMessage("success");
+				response.setDescription(" All Product found");
+				
+			}
+			return response;
+		
+	}
+	@PutMapping(path="/change",produces=
+			MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse  updateProduct(@RequestBody ProductBean bean)
+	{
+		ProductResponse response=new ProductResponse();
+		
+		ProductBean bean1= new ProductBean();
+		bean1.setCost(bean.getCost());
+		bean1.setImageUrl(bean.getImageUrl());
+		bean1.setName(bean.getName());
+		if(service.updateProduct(bean.getId(), bean1))
+		{
+			response.setStatusCode(201);
+			response.setMessage("success");
+			response.setDescription(" Product updated found");
+		}
+		else
+		{
+			response.setStatusCode(401);
+			response.setMessage("failuer");
+			response.setDescription("unable to updated");
+		}
+		return response;
+	}
+	@DeleteMapping(path="/delete{id}",produces=
+			MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse deleteEmployee(@PathVariable("id")int id)
+	{
+		ProductResponse response=new ProductResponse();
+		service.deleteProduct(id);
+		response.setStatusCode(201);
+		response.setMessage("Sucess");
+		response.setDescription("Employee Details Deleted");
+		return response;
+		
+	}
+
+}

@@ -1,0 +1,76 @@
+package com.capgemini.productspringboot.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceUnits;
+import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Repository;
+
+import com.capgemini.productspringboot.dto.ProductBean;
+import com.capgemini.productspringboot.exception.ProductException;
+@Repository
+public class ProductDaoImpl implements ProductDao {
+	@PersistenceUnit
+   private EntityManagerFactory factory;
+	@Override
+	public boolean addProduct(ProductBean bean) {
+		EntityManager manager=factory.createEntityManager();//one per operation alws local
+		EntityTransaction transaction=manager.getTransaction();
+		ProductBean productbean=new ProductBean();
+		productbean.setId(bean.getId());
+		productbean.setCost(bean.getCost());
+		productbean.setImageUrl(bean.getImageUrl());
+		productbean.setName(bean.getName());
+		transaction.begin();
+		try {
+			manager.persist(productbean);
+			transaction.commit();
+			return true;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new ProductException("product Already exits");
+		}
+	}
+
+	@Override
+	public ProductBean getProduct(int id) {
+		String jpql="from EmployeeBean where email=:email";
+		EntityManager manager=factory.createEntityManager();
+		TypedQuery <ProductBean>query=manager.createQuery(jpql,ProductBean.class);
+		
+		query.setParameter("id", id);
+		try {
+			return query.getSingleResult();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public List<ProductBean> getAllProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateProduct(int id, ProductBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteProduct(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

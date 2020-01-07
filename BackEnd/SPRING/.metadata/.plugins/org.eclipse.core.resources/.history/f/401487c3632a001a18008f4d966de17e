@@ -1,0 +1,39 @@
+package com.capgemini.productspringboot.controller;
+
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.capgemini.productspringboot.dto.ProductBean;
+import com.capgemini.productspringboot.dto.ProductResponse;
+import com.capgemini.productspringboot.service.ProductService;
+
+public class ProductController {
+	@Autowired
+	private ProductService service;
+	@PostMapping(path="/register",
+			produces=
+			MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse addProduct(@RequestBody ProductBean bean)
+	{
+		ProductResponse response=new ProductResponse();
+		if(service.addProduct(bean))
+		{
+			response.setStatusCode(201);
+			response.setMessage("Sucess");
+			response.setDescription("Product Registered");
+			
+		}
+		else
+		{
+			response.setStatusCode(401);
+			response.setMessage("Failure");
+			response.setDescription(" Product Already Exits");
+		}
+		return response;
+	}
+
+}

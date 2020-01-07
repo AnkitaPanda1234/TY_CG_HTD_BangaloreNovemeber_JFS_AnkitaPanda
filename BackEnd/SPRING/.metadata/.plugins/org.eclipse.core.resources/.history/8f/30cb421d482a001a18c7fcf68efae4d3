@@ -1,0 +1,53 @@
+package com.capgemini.productspringboot.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceUnits;
+
+import org.springframework.stereotype.Repository;
+
+import com.capgemini.productspringboot.dto.ProductBean;
+@Repository
+public class ProductDaoImpl implements ProductDao {
+	@PersistenceUnit
+   private EntityManagerFactory factory;
+	@Override
+	public boolean addProduct(ProductBean bean) {
+		EntityManager manager=factory.createEntityManager();//one per operation alws local
+		EntityTransaction transaction=manager.getTransaction();
+		ProductBean productbean=new ProductBean();
+		productbean.setId(bean.getId());
+		productbean.setCost(bean.getCost());
+		productbean.setImageUrl(bean.getImageUrl());
+		productbean.setName(bean.getName());
+	}
+
+	@Override
+	public ProductBean getProduct(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductBean> getAllProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateProduct(int id, ProductBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteProduct(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

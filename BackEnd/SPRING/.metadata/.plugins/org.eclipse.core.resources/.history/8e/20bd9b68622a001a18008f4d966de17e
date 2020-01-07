@@ -1,0 +1,5 @@
+package com.capgemini.productspringboot.controller;
+
+public class ProductController {
+
+}
