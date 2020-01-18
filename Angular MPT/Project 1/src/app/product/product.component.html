@@ -1,0 +1,29 @@
+
+            <div class="alert alert-danger"  *ngIf='message'>{{message}}</div>
+
+            <div class="container mt-3">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Index</th>
+                            <th>name</th>
+                            <th>image url</th>
+                            <th>price</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let product of products; index as i'>
+                          
+                       
+                              
+                      
+                            <td>{{i+1}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.image}}</td>
+                            <td>{{product.price}}</td>
+            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>

@@ -1,0 +1,22 @@
+<div class="alert alert-danger"  *ngIf='message'>{{message}}</div>
+
+<div class="container mt-3">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>name</th>
+                <th>email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let customer of customers' >
+            
+                <td>{{customer.name}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
