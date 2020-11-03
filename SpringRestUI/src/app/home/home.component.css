@@ -1,0 +1,22 @@
+
+.background {
+  /* box-sizing: border-box; */
+  padding-top: 5px;
+  height: 95%;
+  width: 100%;
+  background: no-repeat;
+  background-size: cover;
+  background-image: url('https://cdn.pixabay.com/photo/2015/12/01/20/28/fall-1072821_960_720.jpg');
+  font-family: 'Raleway', sans-serif;
+}
+
+.fms {
+  padding-top: 15rem;
+  color: white;
+  font-size: 46px;
+}
+.text-center.fms{
+font-size: 50px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+text-shadow: 2px 2px 5px red;
+}

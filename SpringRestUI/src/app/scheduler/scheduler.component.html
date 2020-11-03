@@ -1,0 +1,30 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-danger" *ngIf='error'>{{error}}</div>
+
+<div class="container mt-3">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>index</th>
+                <th>SchedulerId</th>
+                <th>Scheduler-Name</th>
+                <th>Scheduler-Password</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let schedulers of scheduler ;index as i'>
+                <td>{{i+1}}</td>
+                <td>{{schedulers.id}}</td>
+                <td>{{schedulers.username}}</td>
+                <td>{{schedulers.password}}</td>     
+                <td><button class="btn btn-outline-primary" (click)='deletescheduler(schedulers)'>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    
+    
+    
+    
+   

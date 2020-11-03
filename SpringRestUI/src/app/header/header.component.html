@@ -1,0 +1,25 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="row w-100">
+    <div class="col-1 text-center backBtn">
+      <i class="fas fa-chevron-left" *ngIf='isLoggedIn();' (click)="goBack()"></i>
+    </div>
+    <div class="col">
+      <div class="container ml-0">
+        <a class="navbar-brand" routerLink="/">Forestry Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="navbar-nav ml-auto">
+            <ng-template #loginBlock><a class="headerLoginLink" routerLink="/login"><i class="fa fas fa-user mr-2"></i> Login</a></ng-template>
+            <button *ngIf='isLoggedIn(); else loginBlock' class="btn btn-outline-danger text-light" (click)='logout()'>Logout</button>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+
+
+</nav>

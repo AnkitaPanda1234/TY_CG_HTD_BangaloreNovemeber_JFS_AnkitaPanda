@@ -1,0 +1,104 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+<div class="col-md-4 offset-md-4 mt-4">
+    <form #addCustomerForm='ngForm' (ngSubmit)='addCustomer(addCustomerForm)'>
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" name="customerName" minlength="3" maxlength="15" #customerName='ngModel' ngModel required
+                pattern="^[A-Za-z]+$" class="form-control" placeholder="Enter customer name...">
+            <div *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+                class="alert alert-danger">
+                <small *ngIf="customerName.errors.required">
+                    Name is required.
+                </small>
+                <small *ngIf="customerName.errors.minlength">
+                    Name must be at least 3 characters long.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" minlength="8" required #email='ngModel' ngModel
+                class="form-control" email placeholder="Enter customer email" minlength="8">
+            <div *ngIf='email.touched && email.invalid'>
+                <small class="alert alert-danger" *ngIf='customerEmail.errors.required'>This field is mandatory</small>
+                <small class="alert alert-danger" *ngIf='customerEmail.errors.minlength'>Minimum 8 characters are
+                    required
+                </small>
+                <small class="alert alert-danger" *ngIf='customerEmail.errors.email'>Enter proper format for
+                    email</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postalCode">PostalCode</label>
+            <input type="text" name="postalCode" id="postalCode" minlength="6" maxlength="6" #postalCode='ngModel'
+                ngModel pattern="[0-9]{6}" class="form-control" placeholder="enter valid postal code..." required>
+            <div *ngIf="postalCode.invalid && (postalCode.dirty || postalCode.touched)" class="alert alert-danger">
+                <small *ngIf="postalCode.errors.required">
+                    PostalCode is required.
+                </small>
+                <small *ngIf="postalCode.errors.minlength">
+                    PostalCode must be 6 digit long.
+                </small>
+                <small *ngIf="postalCode.errors.maxlength">
+                    PostalCode must be 6 digit long.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="streetAddress1">Street Address</label>
+            <input type="streetAddress1" id="streetAddress1" minlength="5" maxlength="25" #streetAddress1='ngModel'
+                ngModel pattern="^[a-zA-Z0-9\s.,'-]*$" class="form-control" placeholder="enter valid address..."
+                required>
+            <div *ngIf="streetAddress1.invalid && (streetAddress1.dirty || streetAddress1.touched)"
+                class="alert alert-danger">
+                <small *ngIf="streetAddress1.errors.required">
+                    Address is required.
+                </small>
+                <small *ngIf="streetAddress1.errors.minlength">
+                    Address must be atleast 5 characters long.
+                </small>
+                <small *ngIf="streetAddress1.errors.maxlength">
+                    Address must be 25 characters long.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="telephoneNum">Contact Number</label>
+            <input type="text" name="telephoneNum" id="telephoneNum" minlength="10" maxlength="10"
+                #telephoneNum='ngModel' ngModel class="form-control" pattern="^[6789]{1}[0-9]{9}$"
+                placeholder="enter valid contact number..." required>
+            <div *ngIf="telephoneNum.invalid && (telephoneNum.dirty ||telephoneNum.touched)" class="alert alert-danger">
+                <small *ngIf="telephoneNum.errors.required">
+                    Contact Number is required.
+                </small>
+                <small *ngIf="telephoneNum.errors.minlength">
+                    Contact Number must be 10 digits long.
+                </small>
+                <small *ngIf="telephoneNum.errors.maxlength">
+                    Contact Number must be 10 digits long.
+                </small>
+                <small *ngIf="telephoneNum.errors.pattern">
+                    Contact Number must be start with [6,7,8,9].
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="town">Town</label>
+            <input type="text" name="town" id="town" minlength="3" maxlength="10" #town='ngModel' ngModel
+                class="form-control" pattern="^[A-Za-z]+$" placeholder="Enter valid town..." required>
+            <div *ngIf="town.invalid && (town.dirty ||town.touched)" class="alert alert-danger">
+                <small *ngIf="town.errors.required">
+                    Town is required.
+                </small>
+                <small *ngIf="town.errors.minlength">
+                    Town must be atleast 3 characters long.
+                </small>
+                <small *ngIf="town.errors.maxlength">
+                    Town must be 10 characters long.
+                </small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary float-right">Add Customer</button>
+    </form>
+</div>

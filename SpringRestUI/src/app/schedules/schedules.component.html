@@ -1,0 +1,38 @@
+ng<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-danger" *ngIf='error'>{{error}}</div>
+
+
+<div class="container mt-3">
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>index</th>
+            <th>ScheduleId</th>
+            <th>ContractId</th>
+            <th>CustomerId</th>
+            <th>ProductId</th>
+            <th>OrderId</th>
+            <th>Quantity</th>
+            <th>DeliveryDate</th>
+            <th>Status</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let schedule of schedules | filterSchedules: search;index as i'>
+            <td>{{i+1}}</td>
+            <td>{{schedule.scheduleId}}</td>
+            <td>{{schedule.contractId}}</td>
+            <td>{{schedule.customerId}}</td>
+            <td>{{schedule.productId}}</td>
+            <td>{{schedule.orderId}}</td>
+            <td>{{schedule.quantity}}</td>
+            <td>{{schedule.deliveryDate}}</td>           
+            <td>{{schedule.status}}</td>
+            <td><button class="btn btn-outline-primary" (click)='deleteschedule(schedule)'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+

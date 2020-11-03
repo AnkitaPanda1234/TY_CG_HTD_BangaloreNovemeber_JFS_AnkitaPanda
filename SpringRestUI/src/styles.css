@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "https://fonts.googleapis.com/css?family=Raleway:700&display=swap";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body::after {
+    content: "";
+    background-image: url('/assets/bg.jpg');
+    background-size: cover;
+    background-image: rgba(0, 0, 0, 0.5);   
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;  
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

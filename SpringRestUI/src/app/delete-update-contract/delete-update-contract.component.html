@@ -1,0 +1,58 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+
+<div class="col-md-4 offset-md-4 mt-4">
+<h4 class = "text-center text-secondary">Update contract!!</h4>
+    <form #editForm='ngForm' (ngSubmit)='updateContract(editForm)'>
+            <input type="hidden" name="contractId" id="contractId" #contractId='ngModel'  class="form-control" [(ngModel)]=
+            'contract.contractId'>
+            <!-- //two way data binding -->
+<div class="form-group">
+            <label for="customerId">Customer Id</label>
+            <input type="text" name="customerId" id="customerId" #customerId='ngModel' class="form-control" required
+            [(ngModel)]=
+            'contract.customerId'></div>
+            <div class="form-group">
+                <label for="productId">Product Id</label>
+                <input type="text" name="productId" id="productId" #productId='ngModel' class="form-control" required
+                [(ngModel)]=
+                'contract.productId'></div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" name="quantity" id="quantity"  #quantity='ngModel' required pattern = "[0-9]" class="form-control"
+            [(ngModel)]=
+            'contract.quantity'>
+        </div>
+        <div class="form-group">
+            <label for="deliveryDate">Delivery Date</label>
+            <input type="text" name="deliveryDate" id="deliveryDate"  #deliveryDate='ngModel' required pattern = "[0-9]" class="form-control"
+            [(ngModel)]=
+            'contract.deliveryDate'>
+        </div>
+        <button type="submit" class="btn btn-outline-primary float-right">Update Contract</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

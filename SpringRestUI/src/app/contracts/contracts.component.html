@@ -1,0 +1,37 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-danger" *ngIf='error'>{{error}}</div>
+  
+<div class="container mt-3">
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>index</th>
+            <th>ContractId</th>
+            <th>CustomerId</th>
+            <th>ProductId</th>
+            <th>OrderId</th>
+            <th>Quantity</th>
+            <th>DeliveryDate</th>
+            <th>Status</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let contract of contracts| filterContracts: search ;index as i'>
+            <td>{{i+1}}</td>
+            <td>{{contract.contractId}}</td>
+            <td>{{contract.customerId}}</td>
+            <td>{{contract.productid}}</td>
+            <td>{{contract.orderId}}</td>
+            <td>{{contract.quantity}}</td>
+            <td>{{contract.deliveryDate}}</td>
+            <td>{{contract.status}}</td>
+        
+            <td><button class="btn btn-outline-primary" (click)='deletecontract(contract)'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+

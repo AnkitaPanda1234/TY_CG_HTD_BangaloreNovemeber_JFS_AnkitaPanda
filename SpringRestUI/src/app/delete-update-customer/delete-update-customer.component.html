@@ -1,0 +1,45 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+<div class="col-md-4 offset-md-4 mt-4">
+<h4 class = "text-center text-secondary">Update Customer!!</h4>
+    <form #editForm='ngForm' (ngSubmit)='updateCustomer(editForm)'>
+        <!-- <label for="customerid">Customer Id</label> -->
+            <input type="hidden" name="customerid" id="customerid" #customerid='ngModel'  class="form-control" [(ngModel)]=
+            'customers.customerid'>
+            <!-- //two way data binding -->
+           <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" name="customerName" id="customerName" #customerName='ngModel' class="form-control" required
+            [(ngModel)]=
+            'customers.customerName'></div>
+            <div class="form-group">
+                <label for="email">Customer Email</label>
+                <input type="email" name="email" id="email" #email='ngModel' class="form-control" required
+                [(ngModel)]=
+                'customers.email'></div>
+                <div class="form-group">
+                    <label for="streetAddress1">Customer Address</label>
+                    <input type="textarea" name="streetAddress1" id="streetAddress1" #streetAddress1='ngModel' class="form-control" required
+                    [(ngModel)]=
+                    'customers.streetAddress1'></div>
+                    <div class="form-group">
+                        <label for="town">Customer Town</label>
+                        <input type="text" name="town" id="town" #town='ngModel' class="form-control" required
+                        [(ngModel)]=
+                        'customers.town'></div>
+                        <div class="form-group">
+                            <label for="postalCode">Postal Code</label>
+                            <input type="text" name="postalCode" id="postalCode"  #postalCode='ngModel' required pattern = "[0-9]{6}" class="form-control"
+                            [(ngModel)]=
+                            'customers.postalCode'>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephoneNum">Contact Number</label>
+                            <input type="text" name="telephoneNum" id="telephoneNum"  #telephoneNum='ngModel' required pattern = "[6789]{1}[0-9]{9}" class="form-control"
+                            [(ngModel)]=
+                            'customers.telephoneNum'>
+                        </div>
+        <button type="submit" class="btn btn-outline-primary float-right">Update Customer</button>
+    </form>
+</div>
+

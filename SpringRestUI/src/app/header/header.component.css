@@ -1,0 +1,22 @@
+.nav-link{
+    padding-right: 10px;
+    color: white;
+}
+.navbar-brand, .dropdown-toggle, .btn-outline-danger, .nav-link {
+    color: white !important;
+}
+.headerLoginLink {
+    color: #fefefe;
+    text-decoration: none;
+}
+.backBtn {
+    color: white;
+    margin-top: 7px;
+    cursor: pointer;
+}
+.navbar-brand{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
+    font-style: italic;
+
+}

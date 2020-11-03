@@ -1,0 +1,40 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+<div class="col-md-4 offset-md-4 mt-4">
+    <form #addProductForm='ngForm' (ngSubmit)='addProduct(addProductForm)'>
+        <div class="form-group">
+            <label for="productname">Product Name</label>
+            <input type="text" name="productname" id="productname" #productname='ngModel'ngModel required pattern="^[a-z0-9_-]{3,15}$" class="form-control" required>
+            <div *ngIf="productname.invalid && productname.touched"
+            class="alert alert-danger">
+          <div *ngIf="productname.errors.required">
+            Product name is required.
+          </div>
+          <div *ngIf="productname.errors.minlength">
+            Name must be atleast 5 characters long.
+          </div> 
+          <div *ngIf="productname.errors.maxlength">
+            Name must be 15 characters long.
+          </div>    
+        </div> 
+    </div>       
+                <div class="form-group">
+                    <label for="productquantity">Product Quantity</label>
+                    <input type="text" name="productquantity" id="productquantity" #productquantity='ngModel'minlength="2" maxlength="6" ngModel required pattern="[0-9]{2}" class="form-control">
+                    <div *ngIf="productquantity.invalid &&  productquantity.touched"
+                    class="alert alert-danger">
+                  <div *ngIf="productquantity.errors.required">
+                    Quantity should be atleast 2 digit.
+                  </div>
+                  <div *ngIf="productquantity.errors.minlength">
+                    Name must be atleast 5 characters long.
+                  </div> 
+                  <div *ngIf="productquantity.errors.maxlength">
+                    Quantity must be 6 characters long.
+                  </div>    
+                </div> 
+                </div>
+                   
+        <button type="submit" class="btn btn-outline-primary float-right">Add Product</button>
+    </form>
+</div>

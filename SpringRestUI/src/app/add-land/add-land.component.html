@@ -1,0 +1,31 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-success" *ngIf='message'>{{error}}</div>
+
+<div class="col-md-4 offset-md-4 mt-4">
+    <form #addLandForm='ngForm' (ngSubmit)='addLand(addLandForm)'> 
+    <div class="form-group">
+        <label for="landValue">Land Value</label>
+        <input type="text" name="landValue" id="landValue"  #landValue='ngModel' ngModel  class= "form-control" placeholder="Enter Value Here">
+            
+    </div> 
+    <div class="form-group">
+        <label for="landLocation">Location</label>
+        <input type="text" name="landLocation" id="landLocation" minlength="3" maxlength="25" #landLocation='ngModel' ngModel  pattern="[a-zA-Z]{3,25}"   placeholder="enter valid location..." class="form-control">
+    
+    </div>
+    <div class="form-group">
+        <label for="realisedDate">Realised Date</label>
+        <input type="date" name="realisedDate" id="realisedDate" #realisedDate='ngModel' ngModel required min="{{today | date: 'yyyy-MM-dd'}}" class="form-control" placeholder="" required>
+        <div *ngIf='realisedDate.invalid && realisedDate.touched' >
+            <div class="alert alert-danger" *ngIf='realisedDate.errors.required'>
+                Date is required...!
+            </div>
+            <div class="alert alert-danger" *ngIf='realisedDate.errors.pattern'>
+                Enter correct format of date...!
+            </div>
+     </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary float-right">Add Land</button>
+    </form>
+</div>
+

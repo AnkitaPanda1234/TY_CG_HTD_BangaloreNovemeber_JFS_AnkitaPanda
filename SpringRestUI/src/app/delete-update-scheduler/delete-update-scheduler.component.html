@@ -1,0 +1,24 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="alert alert-danger" *ngIf="error">{{error}}</div>
+<div class="col-md-4 offset-md-4 mt-4">
+<h4 class = "text-center text-secondary">Update scheduler!!</h4>
+    <form #editForm='ngForm' (ngSubmit)='updatescheduler(editForm)'>
+            <input type="hidden" name="id" id="id" #schedulerId='ngModel'  class="form-control" [(ngModel)]=
+            'schedulers.id'>
+            <!-- //two way data binding -->
+            <div class="form-group">
+                <label for="username">UserName</label>
+                <input type="username" name="username" id="username" #username='ngModel' class="form-control" required
+                [(ngModel)]=
+                'schedulers.email'></div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="textarea" name="password" id="password" #password='ngModel' class="form-control" required
+                    [(ngModel)]=
+                    'schedulers.password'></div>
+        <button type="submit" class="btn btn-outline-primary float-right">Update scheduler</button>
+    </form>
+</div>
+
+
+

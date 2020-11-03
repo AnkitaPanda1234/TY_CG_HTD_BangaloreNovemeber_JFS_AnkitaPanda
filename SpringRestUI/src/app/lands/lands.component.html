@@ -1,0 +1,33 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-danger" *ngIf='error'>{{error}}</div>
+<input type="search" name="search" id="search" class='form-control col-md-4 offset-4 mt-3 mb-3' [(ngModel)]='search' placeholder="Search For Lands...">
+<div class="container mt-3">
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>index</th>
+            <th>land</th>
+            <th>LandLocation</th>
+            <th>LandValue</th>
+            <th>RealisedDate</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let land of lands | filterLands: search ;index as i'>
+            <td>{{i+1}}</td>
+            <td>{{land.landid}}</td>
+            <td>{{land.landLocation}}</td>
+            <td>{{land.landValue}}</td>
+            <td>{{land.realisedDate}}</td>
+            <td><button class="btn btn-outline-success" (click)='selectland(land)'>
+                update
+            </button></td>
+        
+            <td><button class="btn btn-outline-primary" (click)='deleteland(land)'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
